@@ -26,7 +26,6 @@ x-airflow-common:
   volumes:
     - ./dags:/opt/airflow/dags
     - git_data:/tmp/git
-    - deappconf:/opt/airflow/deappconf
     # - ./airflow.cfg:/opt/airflow/airflow.cfg
 
   user: "${AIRFLOW_UID:-50000}:0"
@@ -51,7 +50,7 @@ services:
       retries: 5
     restart: always
     networks:
-        - trusting_network
+        - airflow_network
 
   redis:
     image: redis:latest
@@ -64,7 +63,7 @@ services:
       retries: 50
     restart: always
     networks:
-        - trusting_network
+        - airflow_network
 
   airflow-webserver:
     <<: *airflow-common
@@ -94,7 +93,7 @@ services:
       retries: 5
     restart: always
     networks:
-        - trusting_network
+        - airflow_network
     depends_on:
       <<: *airflow-common-depends-on
       airflow-init:
@@ -117,7 +116,7 @@ services:
       DUMB_INIT_SETSID: "0"
     restart: always
     networks:
-        - trusting_network
+        - airflow_network
     depends_on:
       <<: *airflow-common-depends-on
       airflow-init:
@@ -133,7 +132,7 @@ services:
       retries: 5
     restart: always
     networks:
-        - trusting_network
+        - airflow_network
     depends_on:
       <<: *airflow-common-depends-on
       airflow-init:
@@ -215,7 +214,7 @@ services:
       _PIP_ADDITIONAL_REQUIREMENTS: ''
     user: "0:0"
     networks:
-        - trusting_network
+        - airflow_network
     volumes:
       - .:/sources
 
@@ -224,7 +223,7 @@ services:
     profiles:
       - debug
     networks:
-        - trusting_network
+        - airflow_network
     environment:
       <<: *airflow-common-env
       CONNECTION_CHECK_MAX_COUNT: "0"
@@ -251,7 +250,7 @@ services:
       retries: 5
     restart: always
     networks:
-        - trusting_network
+        - airflow_network
     depends_on:
       <<: *airflow-common-depends-on
       airflow-init:
@@ -323,7 +322,7 @@ services:
       - 8000:8000
     restart: always
     networks:
-      - trusting_network
+      - airflow_network
     command:
       - python
       - -m
@@ -336,15 +335,12 @@ services:
   import-dags:
     build: .
     networks:
-        - trusting_network
-    command: ["python","-m" ,"airtrust.console.import_dags"]
+        - airflow_network
+    command: ["python","-m" ,"airflow_factory.console.import_dags"]
     environment:
       - AIRTRUST_TEAM_CONF=/opt/airflow/team.yaml
     volumes:
       - ./dags:/opt/airflow/dags
-      - ./config/team.yaml:/opt/airflow/team.yaml
-      - git_data:/tmp/git
-      - deappconf:/opt/airflow/deappconf
     depends_on:
       - git-sync-bde-team
 volumes:
@@ -354,6 +350,6 @@ volumes:
   git_data:
   deappconf:
 networks:
-  trusting_network:
+  airflow_network:
     driver: bridge
       
