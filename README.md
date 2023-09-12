@@ -1,4 +1,4 @@
-# Xây dựng Dataplatform hoàn chỉnh
+# Building a Complete Dataplatform
 Synthesize knowledge related to building a complete data platform system
 ## Main Stack
 - Data Processing
