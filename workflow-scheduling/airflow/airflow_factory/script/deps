@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+DIR=$1
+DEV_APT_DEPS="build-essential"
+apt-get update
+apt-get install -y --no-install-recommends ${DEV_APT_DEPS}
+pip install --use-deprecated=legacy-resolver --no-cache-dir --constraint "$DIR/constraints.txt" -r $DIR/requirements.txt
+pip install --use-deprecated=legacy-resolver --no-cache-dir --constraint "$DIR/constraints.txt" --no-deps -r $DIR/requirements_nodeps.txt
+apt-get purge ${DEV_APT_DEPS} -y
+apt-get autoremove -y
+apt-get clean
+rm -rf /var/lib/apt/lists/*
