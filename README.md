@@ -14,7 +14,7 @@ Synthesize knowledge related to building a complete data platform system
 
 ## Data Ingestion
 1. SASS Tool: Fivetran, Hevo Data ..
-2. Opensource Tools: Singer, Streamsets
+2. Opensource Tools: Airbyte, Singer, Streamsets
 3. Custom Data Ingestion built in on orchestration engines like: Airflow
 ## Data Processing
 ### ETL

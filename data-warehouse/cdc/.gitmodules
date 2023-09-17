@@ -1,0 +1,3 @@
+[submodule "Debezium Common Lib"]
+	path = DebeziumCDC
+	url = https://github.com/tuancamtbtx/cdc-debezium-common

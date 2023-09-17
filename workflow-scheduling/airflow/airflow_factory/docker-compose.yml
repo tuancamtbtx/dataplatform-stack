@@ -76,8 +76,6 @@ services:
       timeout: 10s
       retries: 5
     restart: always
-    networks:
-        - trusting_network
     depends_on:
       <<: *airflow-common-depends-on
       airflow-init:
@@ -255,94 +253,6 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
-  # spark-master:
-  #   image: docker.io/bitnami/spark:3.3 
-  #   ports:
-  #     - "9090:8080"
-  #     - "7077:7077"
-  #   volumes:
-  #      - ./apps:/opt/spark-apps
-  #      - ./data:/opt/spark-data
-  #   environment:
-  #     - SPARK_LOCAL_IP=spark-master
-  #     - SPARK_WORKLOAD=master
-  #   networks:
-  #       - trusting_network
-  # spark-worker-a:
-  #   image: docker.io/bitnami/spark:3.3
-  #   ports:
-  #     - "9091:8080"
-  #     - "7000:7000"
-  #   depends_on:
-  #     - spark-master
-  #   environment:
-  #     - SPARK_MASTER=spark://spark-master:7077
-  #     - SPARK_WORKER_CORES=1
-  #     - SPARK_WORKER_MEMORY=1G
-  #     - SPARK_DRIVER_MEMORY=1G
-  #     - SPARK_EXECUTOR_MEMORY=1G
-  #     - SPARK_WORKLOAD=worker
-  #     - SPARK_LOCAL_IP=spark-worker-a
-  #   volumes:
-  #      - ./apps:/opt/spark-apps
-  #      - ./data:/opt/spark-data
-  #   networks:
-  #       - trusting_network
-  # nginx:
-  #   image: nginx:latest
-  #   ports:
-  #     - "8088:80"
-  #   volumes:
-  #     - repo_sources:/usr/share/nginx/html:z
-  #   depends_on:
-  #     - git-sync-bde-team
-  #   restart: always
-  #   networks:
-  #       - trusting_network
-  git-sync-bde-team: 
-    image: registry.k8s.io/git-sync/git-sync:v3.6.6
-    networks:
-        - trusting_network
-    environment:
-      GIT_SYNC_REPO: "git@github.com:tsocial/airtrust-dags.git"
-      GIT_SYNC_DEST: "airtrust-dags"
-      GIT_SYNC_BRANCH: "main"
-      GIT_SYNC_WAIT: "10"
-      GIT_SYNC_SSH: true
-      GIT_SSH_KEY_FILE: /opt/git-sync/key/id_rsa.pub
-      GIT_SSH_KNOWN_HOSTS_FILE: /opt/git-sync/key/known_hosts
-    volumes:
-      - ./key/test_ssh:/opt/git-sync/key/id_rsa.pub
-      - ~/.ssh/known_hosts:/opt/git-sync/key/known_hosts
-      - git_data:/tmp/git
-    restart: always
-  app-server:
-    build: .
-    ports:
-      - 8000:8000
-    restart: always
-    networks:
-      - airflow_network
-    command:
-      - python
-      - -m
-      - uvicorn
-      - airtrust.console.app_server:app
-      - --host
-      - 0.0.0.0
-    volumes:
-      - ./config/team.yaml:/opt/airflow/team.yaml
-  import-dags:
-    build: .
-    networks:
-        - airflow_network
-    command: ["python","-m" ,"airflow_factory.console.import_dags"]
-    environment:
-      - AIRTRUST_TEAM_CONF=/opt/airflow/team.yaml
-    volumes:
-      - ./dags:/opt/airflow/dags
-    depends_on:
-      - git-sync-bde-team
 volumes:
   postgres-db-volume:
   repo_sources: 
