@@ -1,0 +1,3 @@
+[submodule "data-ingestion/streaming/cdc/debezium-commom"]
+	path = data-ingestion/streaming/cdc/debezium-commom
+	url = https://github.com/tuancamtbtx/cdc-debezium-common
