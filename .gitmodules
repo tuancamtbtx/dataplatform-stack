@@ -7,3 +7,9 @@
 [submodule "data-ingestion/streaming/kafkastream-example"]
 	path = data-ingestion/streaming/kafkastream-example
 	url = https://github.com/tuancamtbtx/kafkastream-starter
+[submodule "data-ingestion/cdc/data-ingestion/cdc/debezium-common"]
+	path = data-ingestion/cdc/data-ingestion/cdc/debezium-common
+	url = https://github.com/tuancamtbtx/cdc-debezium-common
+[submodule "data-ingestion/cdc/debezium-common"]
+	path = data-ingestion/cdc/debezium-common
+	url = https://github.com/tuancamtbtx/cdc-debezium-common
