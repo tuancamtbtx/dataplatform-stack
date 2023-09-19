@@ -1,0 +1,15 @@
+{
+  "primaryKeyId": 1287240527,
+  "key": [
+    {
+      "keyData": {
+        "typeUrl": "type.googleapis.com/google.crypto.tink.AesSivKey",
+        "value": "EkBU/l4OQ/cQhyRFb5KuJm+KvEAeX1gcRhcoIyO/K53lHCxKVkai3EgmibgEkpjxQMsLv8+8dD19SWE5S/ljK2kb",
+        "keyMaterialType": "SYMMETRIC"
+      },
+      "status": "ENABLED",
+      "keyId": 1287240527,
+      "outputPrefixType": "TINK"
+    }
+  ]
+}

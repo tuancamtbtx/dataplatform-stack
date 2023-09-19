@@ -1,3 +1,9 @@
 [submodule "data-ingestion/streaming/cdc/debezium-commom"]
 	path = data-ingestion/streaming/cdc/debezium-commom
 	url = https://github.com/tuancamtbtx/cdc-debezium-common
+[submodule "data-ingestion/streaming/flink-streaming-example"]
+	path = data-ingestion/streaming/flink-streaming-example
+	url = https://github.com/tuancamtbtx/flink-streaming-k8s-example
+[submodule "data-ingestion/streaming/kafkastream-example"]
+	path = data-ingestion/streaming/kafkastream-example
+	url = https://github.com/tuancamtbtx/kafkastream-starter
