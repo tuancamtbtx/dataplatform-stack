@@ -22,7 +22,7 @@ ENV PYTHONPATH=$PYTHONPATH:/airflow_factory
 
 RUN export PATH=$PATH:$JAVA_HOME/bin
 # setup JAVA home to submit spark job
-RUN export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin 
+# RUN export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin 
 
 WORKDIR $AIRFLOW_HOME
 USER airflow

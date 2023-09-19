@@ -1,0 +1,105 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    component: airlock-task
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: tiki.dedicated
+                operator: In
+                values:
+                  - preempt-highmem
+              - key: topology.kubernetes.io/zone
+                operator: In
+                values:
+                  - asia-southeast1-c
+  containers:
+    - args: []
+      command: []
+      env:
+        - name: AIRFLOW__CORE__EXECUTOR
+          value: LocalExecutor
+        - name: AIRFLOW_HOME
+          value: /home/airflow/airflow
+        - name: AIRFLOW__CORE__DAGS_FOLDER
+          value: /airlock/dags
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /.secrets/tiki-smartflow.json
+        - name: IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      envFrom:
+        - configMapRef:
+            name: airlock-config-env
+        - secretRef:
+            name: airlock-secrets-env
+        - secretRef:
+            name: airlock-secrets-env
+      image: "asia.gcr.io/tikivn/airlock:release"
+      imagePullPolicy: IfNotPresent
+      name: base
+      resources:
+        limits:
+          cpu: "1"
+          memory: 1000Mi
+        requests:
+          cpu: 200m
+          memory: 200Mi
+      volumeMounts:
+        - mountPath: /airlock/dags
+          name: airflow-dags
+          readOnly: false
+          subPath: dags
+        - mountPath: /home/airflow/airflow/logs
+          name: airflow-logs
+          subPath: logs
+          readOnly: false
+        - mountPath: /home/airflow/airflow/airflow.cfg
+          name: airflow-config
+          readOnly: true
+          subPath: airflow.cfg
+        - mountPath: /.secrets
+          name: gcp-logs-creds
+          readOnly: true
+  imagePullSecrets:
+    - name: tiki-gcr
+  restartPolicy: Never
+  securityContext:
+    fsGroup: 1000
+    runAsUser: 1000
+  serviceAccountName: sherlock
+  volumes:
+    - name: airflow-dags
+      persistentVolumeClaim:
+        claimName: airlock-dags
+    - name: airflow-logs
+      persistentVolumeClaim:
+        claimName: airlock
+    - configMap:
+        name: airlock-configmap
+      name: airflow-config
+    - name: gcp-logs-creds
+      secret:
+        secretName: tiki-smartflow-gcp
+  tolerations:
+    - effect: NoSchedule
+      key: dedicated
+      operator: Equal
+      value: preempt-8-32
+    - effect: NoSchedule
+      key: dedicated
+      operator: Equal
+      value: preempt-highmem
+    - effect: NoSchedule
+      key: dedicated
+      operator: Equal
+      value: np-6-39

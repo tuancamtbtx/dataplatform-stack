@@ -1,0 +1,11 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: airlock-bins
+data:
+  git-hook.sh: |
+    #!/bin/sh
+    yes | mkdir -p /airlock/dags/$LOCATION &&\
+      cp -r * /airlock/dags/$LOCATION || true &&\
+      cp .airflowignore /airlock/dags/$LOCATION || true

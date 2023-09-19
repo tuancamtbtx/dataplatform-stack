@@ -38,3 +38,4 @@ Synthesize knowledge related to building a complete data platform system
 
 1. Metabase
 ![metabase ](https://www.metabase.com/images/stats-dashboard.svg)
+

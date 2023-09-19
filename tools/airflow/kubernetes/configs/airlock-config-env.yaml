@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: airlock-config-env
+data:
+  PYTHONPATH: "/tiki/airlock:/home/airflow/.local/lib/python3.8/site-packages"
+  AIRFLOW_HOME: /home/airflow/airflow

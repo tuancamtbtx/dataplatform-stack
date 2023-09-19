@@ -1,0 +1,317 @@
+repos:
+  - repo: ssh://git@stash.tiki.com.vn:7999/data/airlock.git
+    branch: master
+    id: airlock # default
+  - repo: ssh://git@stash.tiki.com.vn:7999/data/airlock-dwh.git
+    branch: master
+    id: airlock-dwh
+  - repo: ssh://git@stash.tiki.com.vn:7999/data/trackity.git
+    branch: master
+    id: airlock-trackity
+  - repo: ssh://git@stash.tiki.com.vn:7999/data/airlock-sync.git
+    branch: master
+    id: airlock-sync
+  - repo: git@github.com:tikivn/smartflow.git
+    branch: main
+    id: smartflow
+    type: python
+  - repo: git@github.com:tikivn/retailiqflow.git
+    branch: main
+    id: retailiqflow
+
+teams:
+  - name: consumer_products
+    owner: consumer@tiki.vn
+    prefix: consumer
+
+  - name: finances
+    owner: FA.FI@tiki.vn
+    prefix: fna
+    role_id: 6
+    pool: fna
+    alert:
+      kind: telegram
+      conn_id: fin_airlock_telegram
+    conns:
+      - conn_id: gcp_fna_data
+        replace_fields:
+          - bigquery_conn_id
+          - gcp_conn_id
+          - google_cloud_storage_conn_id
+          - google_cloud_conn_id
+          - sheet_conn_id
+
+  - name: marketplaces
+    owner: mkp@tiki.vn
+    prefix: mkp
+    role_id: 11
+    alert:
+      kind: telegram
+      conn_id: mkp_telegram
+    pool: commercial
+    conns:
+      - conn_id: gcp_mkp_data
+        replace_fields:
+          - bigquery_conn_id
+          - gcp_conn_id
+          - google_cloud_storage_conn_id
+          - google_cloud_conn_id
+          - sheet_conn_id
+
+  - name: syncing
+    owner: datateam@tiki.vn
+    prefix: sync
+    repo_id: airlock-sync
+    role_id: 30
+    alert:
+      kind: slack
+      conn_id: alert_syncing
+
+  - name: dwh
+    owner: datateam@tiki.vn
+    prefix: dwh
+    repo_id: airlock-dwh
+    role_id: 32
+    alert:
+      kind: telegram
+      conn_id: airlock_telegram
+
+  - name: analytic
+    owner: datateam@tiki.vn
+    prefix: analytic
+    alert:
+      kind: telegram
+      conn_id: airlock_telegram
+
+  - name: cdp
+    owner: datateam@tiki.vn
+    prefix: tiki_cdp
+    repo_id: airlock-dwh
+    role_id: 25
+    alert:
+      kind: telegram
+      conn_id: tiki_cdp_telegram
+
+  - name: ops
+    owner: long.doan@tiki.vn
+    prefix: tiki_ops
+
+  - name: accounting
+    owner: huy.dang@tiki.vn
+    prefix: accounting
+
+  - name: daolap
+    owner: hien.pham2@tiki.vn
+    prefix: da_2olap
+    repo_id: airlock-dwh
+    alert:
+      kind: telegram
+      conn_id: airlock_telegram
+
+  - name: retail
+    owner: trong.nguyen@tiki.vn
+    prefix: retail
+    role_id: 11
+    pool: commercial
+    alert:
+      kind: telegram
+      conn_id: mkp_telegram
+    conns:
+      - conn_id: gcp_retail_data
+        replace_fields:
+          - bigquery_conn_id
+          - gcp_conn_id
+          - google_cloud_storage_conn_id
+          - google_cloud_conn_id
+          - sheet_conn_id
+
+  - name: fds
+    owner: fds@tiki.vn
+    prefix: fds
+    alert:
+      kind: telegram
+      conn_id: alert_fds_telegram
+
+  - name: supply_chain
+    owner: supply_chain@tiki.vn
+    prefix: supply_chain
+    role_id: 13
+    alert:
+      kind: telegram
+      conn_id: alert_sc_telegram
+    conns:
+      - conn_id: tnsl_dwh_bigquery
+        replace_fields:
+          - bigquery_conn_id
+          - gcp_conn_id
+          - google_cloud_storage_conn_id
+          - google_cloud_conn_id
+          - sheet_conn_id
+
+  - name: marketing
+    owner: anh.vu2@tiki.vn
+    prefix: mkt
+    role_id: 15
+    repo_id: airlock-dwh
+    alert:
+      kind: telegram
+      conn_id: alert_mkt_telegram
+
+  - name: tikinow
+    owner: tikinow@tiki.vn
+    prefix: tikinow
+    role_id: 16
+    alert:
+      kind: telegram
+      conn_id: alert_tikinow_telegram
+  - name: tnsl
+    owner: tnsl@tiki.vn
+    prefix: tnsl
+    role_id: 17
+
+  - name: seller_center
+    owner: seller_center@tiki.vn
+    prefix: seller_center
+    role_id: 20
+    pool: seller_center
+    alert:
+      kind: slack
+      conn_id: alert_seller_center
+    conns:
+      - conn_id: gcp_sellercenter_data
+        replace_fields:
+          - bigquery_conn_id
+          - gcp_conn_id
+          - google_cloud_storage_conn_id
+          - google_cloud_conn_id
+          - sheet_conn_id
+
+  - name: trackity
+    owner: hien.pham2@tiki.vn
+    prefix: trackity
+    role_id: 21
+    repo_id: airlock-trackity
+    alert:
+      kind: slack
+      conn_id: alert_trackity
+    conns:
+      - conn_id: gcp_trackity
+        replace_fields:
+          - bigquery_conn_id
+          - gcp_conn_id
+          - google_cloud_storage_conn_id
+          - google_cloud_conn_id
+          - sheet_conn_id
+
+  - name: tiki_growth
+    owner: quyen.phan@tiki.vn
+    prefix: tiki_growth
+    role_id: 22
+    repo_id: airlock
+    pool: growth
+    alert:
+      kind: telegram
+      conn_id: alert_tikinow_telegram
+    conns:
+      - conn_id: gcp_tikigrowth_data
+        replace_fields:
+          - bigquery_conn_id
+          - gcp_conn_id
+          - google_cloud_storage_conn_id
+          - google_cloud_conn_id
+          - sheet_conn_id
+
+  - name: tikicare
+    owner: thao.tran@tiki.vn
+    prefix: tikicare
+    role_id: 23
+    repo_id: airlock
+    alert:
+      kind: telegram
+      conn_id: alert_tikicare_telegram
+
+  - name: search
+    owner: minh.vu@tiki.vn
+    prefix: search
+    role_id: 24
+    repo_id: airlock
+    alert:
+      kind: slack
+      conn_id: alert_search_slack
+
+  - name: audience
+    owner: hien.pham2@tiki.vn
+    prefix: tiki_audience
+    role_id: 26
+    repo_id: airlock-dwh
+    alert:
+      kind: telegram
+      conn_id: tiki_cdp_telegram
+
+  - name: data_infra
+    owner: hien.pham2@tiki.vn
+    prefix: dinf
+    role_id: 27
+    repo_id: airlock-dwh
+    alert:
+      kind: telegram
+      conn_id: tiki_cdp_telegram
+
+  - name: social_commerce
+    owner: tu.hoang@tiki.vn
+    prefix: social_commerce
+    role_id: 28
+    repo_id: airlock
+    alert:
+      kind: slack
+      conn_id: alert_social_commerce
+    conns:
+      - conn_id: gcp_social_commerce
+        replace_fields:
+          - bigquery_conn_id
+          - gcp_conn_id
+          - google_cloud_storage_conn_id
+          - google_cloud_conn_id
+          - sheet_conn_id
+
+  - name: team_app
+    owner: kiet.nguyen@tiki.vn
+    prefix: team_app
+    role_id: 29
+    repo_id: airlock
+    conns:
+      - conn_id: gcp_team_app
+        replace_fields:
+          - bigquery_conn_id
+          - gcp_conn_id
+          - google_cloud_storage_conn_id
+          - google_cloud_conn_id
+          - sheet_conn_id
+
+  - name: smartflow
+    repo_id: smartflow
+    owner: "quoc.pham@tiki.vn"
+    prefix: smartflow
+    role_id: 37
+    type: python
+    alert:
+      kind: slack
+      conn_id: alert_reco
+
+  - name: retailiq
+    repo_id: retailiqflow
+    owner: retailiq@tiki.vn
+    prefix: retailiq
+    role_id: 39
+    pool: retailiq
+    alert:
+      kind: slack
+      conn_id: alert_retailiq
+    conns:
+      - conn_id: gcp_retailiq_conn_data
+        replace_fields:
+          - bigquery_conn_id
+          - gcp_conn_id
+          - google_cloud_storage_conn_id
+          - google_cloud_conn_id
+          - sheet_conn_id

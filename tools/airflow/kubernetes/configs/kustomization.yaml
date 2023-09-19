@@ -1,0 +1,18 @@
+kind: Kustomization
+resources:
+  - ./airlock-bins.yaml
+  - ./airlock-contribmap.yaml
+  - ./airlock-config-env.yaml
+commonLabels:
+  app: airlock
+configMapGenerator:
+  - name: airlock-configmap
+    behavior: "merge"
+    files:
+      - ./airflow/airflow.cfg
+      - ./airflow/webserver_config.py
+      - ./airflow/gunicorn_config.py
+      - ./airflow/pod_template.yml
+      - ./airflow/team_conf.yaml
+generatorOptions:
+  disableNameSuffixHash: true

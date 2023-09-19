@@ -1,0 +1,7 @@
+resources:
+  - ./configs
+  - ./extra/
+images:
+  - name: k8s.gcr.io/git-sync
+    newName: k8s.gcr.io/git-sync/git-sync
+    newTag: v3.3.4

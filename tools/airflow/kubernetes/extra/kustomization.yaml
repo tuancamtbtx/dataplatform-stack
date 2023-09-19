@@ -1,0 +1,11 @@
+resources:
+  - contrib.yaml
+commonLabels:
+  app: airlock
+generatorOptions:
+  disableNameSuffixHash: true
+configMapGenerator:
+  - name: airlock-contrib
+    behavior: "merge"
+    files:
+      - ./prometheus/prom-mapping.yaml

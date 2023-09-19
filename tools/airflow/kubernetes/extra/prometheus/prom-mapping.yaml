@@ -1,0 +1,51 @@
+mappings:
+- match: "airlock.dag.*.*.duration"
+  name: "airlock_task_duration"
+  labels:
+    job: "airlock"
+    dag_id: "$1"
+    task_id: "$2"
+
+- match: "airlock.dagrun.duration.*.*"
+  name: "airlock_dagrun_duration"
+  labels:
+    job: "airlock"
+    type: "$1"
+    dag_id: "$2"
+
+- match: "airlock.operator_(\\w+)_(\\w+)"
+  match_type: regex
+  name: "airlock_operators"
+  labels:
+    job: "airlock"
+    type: "$1"
+    operator_id: "$2"
+
+- match: "airlock.executor.*"
+  name: "airlock_executor"
+  labels:
+    job: "airlock"
+    type: "$1"
+
+- match: "airlock.dagbag_size"
+  name: "airlock_dagbag_size"
+  labels:
+    job: "airlock"
+
+- match: "airlock.scheduler_heartbeat"
+  name: "airlock_scheduler_heartbeat"
+  labels:
+    job: "airlock"
+
+- match: "airlock.pool.*.*"
+  name: "airlock_pool"
+  labels:
+    job: "airlock"
+    type: "$1"
+    pool_id: "$2"
+
+# Any metric not matched will be dropped because "." matches all metrics.
+- match: "."
+  match_type: regex
+  action: drop
+  name: "dropped"

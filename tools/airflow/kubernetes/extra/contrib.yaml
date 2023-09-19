@@ -1,0 +1,118 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: airlock-contrib
+spec:
+  ports:
+    - name: statsd-tcp
+      port: 9125
+      protocol: TCP
+    - name: statsd-udp
+      port: 9125
+      protocol: UDP
+  selector:
+    app: airlock
+    component: airlock-contrib
+  type: ClusterIP
+
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: airlock-contrib
+data:
+  crontab.txt: |
+    @hourly bash /apps/scripts/cleanup.sh
+
+  cleanup.sh: |
+    #!/bin/bash
+    # clean logs old than 48h
+    if [[ ! -z $LOG_DIR ]]; then
+      find /airlock/logs -mmin +2880 -type d -maxdepth 1 -exec rm -rf {} \;
+    fi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airlock-contrib
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: airlock-contrib
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "9102"
+        prometheus.io/scrape: "true"
+      labels:
+        component: airlock-contrib
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: tiki.dedicated
+                    operator: In
+                    values:
+                      - preempt-8-32
+      tolerations:
+        - effect: NoSchedule
+          key: dedicated
+          operator: Equal
+          value: preempt-8-32
+      containers:
+        - name: metrics
+          image: prom/statsd-exporter
+          imagePullPolicy: Always
+          args:
+            - --statsd.mapping-config=/mapping/prom-mapping.yaml
+          volumeMounts:
+            - name: config
+              subPath: prom-mapping.yaml
+              mountPath: /mapping/prom-mapping.yaml
+        - name: task-cleaner
+          image: hienduyph/crontab
+          imagePullPolicy: Always
+          command:
+            - bash
+            - -c
+            - |
+              crontab /home/cronjob/crontab.txt
+              sudo crond -f -l 8
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "100Mi"
+          env:
+            - name: LOG_DIR
+              value: /airlock/logs
+          volumeMounts:
+            - name: storage
+              mountPath: /airlock/logs
+              subPath: logs
+              readOnly: false
+            - name: config
+              subPath: crontab.txt
+              mountPath: /home/cronjob/crontab.txt
+            - name: config
+              subPath: cleanup.sh
+              mountPath: /apps/scripts/cleanup.sh
+      imagePullSecrets:
+        - name: tiki-gcr
+      volumes:
+        - name: config
+          configMap:
+            name: airlock-contrib
+        - name: storage
+          persistentVolumeClaim:
+            claimName: airlock
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
