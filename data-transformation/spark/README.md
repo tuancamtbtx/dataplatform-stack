@@ -1,6 +1,6 @@
 # Apache Spark 
 
-## Install Apache Spark
+## Install Apache Spark (Practice On Local)
 1. Download and extract the Spark package from the Apache Spark website:
 
 ```bash
@@ -19,3 +19,19 @@ export PATH=$PATH:$SPARK_HOME/bin
 ```bash
 spark-shell
 ```
+## Setup Apache Spark On K8S
+
+[Document Setup](./spark-on-kubernetes/README.md)
+
+
+## Overview Architecture 
+![overview ](https://spark.apache.org/docs/latest/img/cluster-overview.png) 
+## Processing Data Pipeline
+
+## Example
+
+
+|        No     |        Project       |     Language  |
+| ------------- | -------------------- |-------------- |
+|       1       | java-spark-example   |      Java     |
+|       2       | python-spark-example |     Python    |

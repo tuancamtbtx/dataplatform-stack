@@ -13,3 +13,9 @@
 [submodule "data-ingestion/cdc/debezium-common"]
 	path = data-ingestion/cdc/debezium-common
 	url = https://github.com/tuancamtbtx/cdc-debezium-common
+[submodule "data-transformation/spark/python-spark-example"]
+	path = data-transformation/spark/python-spark-example
+	url = https://github.com/tuancamtbtx/python-spark-example
+[submodule "data-transformation/spark/java-spark-example"]
+	path = data-transformation/spark/java-spark-example
+	url = https://github.com/tuancamtbtx/java-spark-example
