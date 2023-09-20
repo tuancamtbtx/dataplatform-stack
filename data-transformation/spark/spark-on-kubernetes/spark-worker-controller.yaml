@@ -1,0 +1,43 @@
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: spark-worker-controller
+spec:
+  replicas: 2
+  selector:
+    component: spark-worker
+  template:
+    metadata:
+      labels:
+        component: spark-worker
+    spec:
+      containers:
+        - name: spark-worker
+          image: navicore/spark:1.6.2a
+          imagePullPolicy: Always
+          env:
+          - name: SPARK_WORKER_OPTS
+            value: "-Dspark.worker.cleanup.enabled=true -Dspark.worker.cleanup.appDataTtl=172800"
+          - name: SPARK_WORKER_UI_PORT
+            value: "8082"
+          - name: SPARK_EXECUTOR_MEMORY
+            value: "4g"
+          - name: SPARK_SERVICE_NAME
+            value: "spark-master"
+          command: ["/start-worker"]
+          ports:
+            - containerPort: 8081
+          resources:
+            requests:
+              cpu: 100m
+          volumeMounts:
+            - mountPath: /opt/spark/work/
+              name: work
+      volumes:
+        - name: work
+          hostPath:
+            # directory location on host
+            path: /mnt/spark-worker
+
+
+

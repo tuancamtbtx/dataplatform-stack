@@ -1,0 +1,28 @@
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: spark-master-controller
+spec:
+  replicas: 1
+  selector:
+    component: spark-master
+  template:
+    metadata:
+      labels:
+        component: spark-master
+    spec:
+      containers:
+        - name: spark-master
+          image: navicore/spark:1.6.2a
+          imagePullPolicy: Always
+          env:
+          - name: SPARK_SERVICE_NAME
+            value: "spark-master"
+          command: ["/start-master"]
+          ports:
+            - containerPort: 7077
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+
