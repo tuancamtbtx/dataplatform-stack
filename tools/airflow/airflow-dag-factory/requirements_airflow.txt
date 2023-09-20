@@ -1,4 +1,0 @@
-apache-airflow[google,apache.druid,mysql,slack,async,cncf.kubernetes,statsd,mongo,amazon,microsoft.mssql,postgres,apache.cassandra,http,apache.beam,neo4j,presto,sftp,trino,redis]==2.4.3
-Authlib==0.15.4
-google-cloud-bigquery[bqstorage,pandas]==2.24.0
-google-cloud-core==1.7.2
