@@ -15,9 +15,14 @@ Synthesize knowledge related to building a complete data platform system
 1. Airflow
 
 ## Data Ingestion
+### Batch Ingestion
 1. SASS Tool: Fivetran, Hevo Data ..
 2. Opensource Tools: Airbyte, Singer, Streamsets
 3. Custom Data Ingestion built in on orchestration engines like: Airflow
+### Streaming Ingestion
+
+### CDC (Change Data Capture)
+1. Debezium
 ## Data Processing
 ### ETL
 1. DBT (Data Build Tool)
@@ -26,8 +31,7 @@ Synthesize knowledge related to building a complete data platform system
 ### Streaming
 1. Apache Spark
 2. Apache Flink
-### CDC (Change Data Capture)
-1. Debezium
+
 ## Data Warehouse & Lake
 ### Storage
 1. Hadoop
