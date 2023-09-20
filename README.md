@@ -43,3 +43,7 @@ Synthesize knowledge related to building a complete data platform system
 ## Work Schedule
 - Data Ingestion
 - Data Transform
+
+## Contact Me
+- 🌱 Email: nguyenvantuan140497@gmail.com
+- 📫 How to reach me: [Face book - @tuancam](https://www.facebook.com/tuanbacam)
