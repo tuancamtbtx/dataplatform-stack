@@ -20,7 +20,8 @@ Synthesize knowledge related to building a complete data platform system
 2. Opensource Tools: Airbyte, Singer, Streamsets
 3. Custom Data Ingestion built in on orchestration engines like: Airflow
 ### Streaming Ingestion
-
+1. Apache Spark
+2. Apache Flink
 ### CDC (Change Data Capture)
 1. Debezium
 ## Data Processing
