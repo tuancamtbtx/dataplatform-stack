@@ -6,7 +6,7 @@ Synthesize knowledge related to building a complete data platform system
 - Data Warehouse & Datalake
 - Data Governance
 - Data Analytics
-- MLops
+- MLops (Additional)
 
 ![alt text](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*ryGGGWMgrxdbXAlWRimKHA.png)
 
@@ -18,14 +18,14 @@ Synthesize knowledge related to building a complete data platform system
 ### Batch Ingestion
 1. SASS Tool: Fivetran, Hevo Data ..
 2. Opensource Tools: Airbyte, Singer, Streamsets
-3. Custom Data Ingestion built in on orchestration engines like: Airflow
+3. Custom Data Ingestion built in on orchestration engines like: Python + Airflow, Java Application, Other ...
 ### Streaming Ingestion
 1. Apache Spark
 2. Apache Flink
 ### CDC (Change Data Capture)
 1. Debezium
-## Data Processing
-### ETL
+## Data Transformation
+### Batch
 1. DBT (Data Build Tool)
 2. Apache Spark
 3. Apache Flink
@@ -34,11 +34,16 @@ Synthesize knowledge related to building a complete data platform system
 2. Apache Flink
 
 ## Data Warehouse & Lake
-### Storage
+### Data Warehouse Storage
 1. Hadoop
 2. Bigquery
 3. Redshift
 4. Snowflake
+
+### Data Lake Storage
+1. Hadoop (On primise)
+2. Google Cloud Storage (GCP)
+3. S3 (AWS)
 ## Data Governance
 1. Apache Atlas
 

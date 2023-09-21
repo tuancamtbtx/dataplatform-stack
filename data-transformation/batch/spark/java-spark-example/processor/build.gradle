@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+}
+
+group 'vn.bigdata'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+    implementation group: 'org.yaml', name: 'snakeyaml', version: '2.0'
+    implementation group: 'org.apache.spark', name: 'spark-core_2.12', version: '3.0.1'
+    implementation group: 'org.apache.spark', name: 'spark-sql_2.12', version: '3.0.1'
+    implementation("org.slf4j:slf4j-reload4j:1.7.36")
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.20.0'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.20.0'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.28'
+    implementation(project(":core"))
+    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.15.2'
+    annotationProcessor "org.projectlombok:lombok:1.18.28"
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.8")
+    implementation group: 'com.google.inject', name: 'guice', version: '4.0'
+
+}
+
+test {
+    useJUnitPlatform()
+}
+jar {
+    manifest {
+        attributes "Main-Class": "vn.bigdata.spark.etl.processor.app.ETLProcessor"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    exclude 'META-INF/*.RSA'
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
+}

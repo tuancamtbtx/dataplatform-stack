@@ -22,3 +22,6 @@
 [submodule "tools/airflow-de"]
 	path = tools/airflow-de
 	url = https://github.com/tuancamtbtx/airflow-de
+[submodule "data-transformation/batch/dbt/dbt-example"]
+	path = data-transformation/batch/dbt/dbt-example
+	url = https://github.com/tuancamtbtx/dbt-example

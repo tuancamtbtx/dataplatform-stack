@@ -1,3 +1,0 @@
-# Apache Kafka
-
-# Setup Kafka
