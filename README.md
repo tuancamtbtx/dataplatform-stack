@@ -7,7 +7,6 @@ Synthesize knowledge related to building a complete data platform system
 - Data Warehouse & Datalake
 - Data Governance & Data Catalogs
 - Data Analytics
-- MLops (Additional)
 
 ![alt text](./images/dataplatform.gif)
 
