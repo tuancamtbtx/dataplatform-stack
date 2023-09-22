@@ -2,13 +2,14 @@
 Synthesize knowledge related to building a complete data platform system
 ## Main Stack
 - Data Ingestion
-- Data Processing
+- Data Processing & Data Storage
+- Data Transformation
 - Data Warehouse & Datalake
-- Data Governance
+- Data Governance & Data Catalogs
 - Data Analytics
 - MLops (Additional)
 
-![alt text](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*ryGGGWMgrxdbXAlWRimKHA.png)
+![alt text](./images/dataplatform.gif)
 
 ## Tools for Big Data Engineer
 ### Workflow Schedule

@@ -19,9 +19,6 @@
 [submodule "data-transformation/spark/java-spark-example"]
 	path = data-transformation/spark/java-spark-example
 	url = https://github.com/tuancamtbtx/java-spark-example
-[submodule "tools/airflow-de"]
-	path = tools/airflow-de
-	url = https://github.com/tuancamtbtx/airflow-de
 [submodule "data-transformation/batch/dbt/dbt-example"]
 	path = data-transformation/batch/dbt/dbt-example
 	url = https://github.com/tuancamtbtx/dbt-example
