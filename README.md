@@ -2,7 +2,7 @@
 Synthesize knowledge related to building a complete data platform system
 ## Main Stack
 - Data Ingestion
-- Data Processing & Data Storage
+- Data Processing
 - Data Transformation
 - Data Warehouse & Datalake
 - Data Governance & Data Catalogs
