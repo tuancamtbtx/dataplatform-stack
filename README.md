@@ -1,11 +1,19 @@
 # Building a Complete Dataplatform
 Synthesize knowledge related to building a complete data platform system
+### Clouds:
+
+![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=for-the-badge&logo=microsoftazure&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Google Cloud](https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white)
+### On primise
+![Apache Spark](https://img.shields.io/badge/Apache%20Spark-FDEE21?style=flat-square&logo=apachespark&logoColor=black)
+![Apache Hadoop](https://img.shields.io/badge/Apache%20Hadoop-66CCFF?style=for-the-badge&logo=apachehadoop&logoColor=black)
+
 ## Main Stack
 - Data Ingestion
-- Data Processing
-- Data Transformation
-- Data Warehouse & Datalake
+- Data Processing & Transformation
 - Data Governance & Data Catalogs
+- Data Warehouse & Datalake
 - Data Analytics
 
 ![alt text](./images/dataplatform.gif)
@@ -48,7 +56,7 @@ Synthesize knowledge related to building a complete data platform system
 ## Data Governance
 1. Apache Atlas
 2. Azure Microsoft Purview 
-3.
+3. Data Catalog(GCP)
 
 ## Data Analysis
 
@@ -57,6 +65,7 @@ Synthesize knowledge related to building a complete data platform system
 3. PowerBI
 4. Data Looker
 5. Tableau
+
 ## MLOps
 1. Kubeflow
 2. Minio
