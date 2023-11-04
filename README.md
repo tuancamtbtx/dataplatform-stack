@@ -24,6 +24,7 @@ Synthesize knowledge related to building a complete data platform system
 2. Apache Flink
 ### CDC (Change Data Capture)
 1. Debezium
+![cdc](./images/cdc_debezium_server.gif)
 ## Data Transformation
 ### Batch
 1. DBT (Data Build Tool)
@@ -46,8 +47,10 @@ Synthesize knowledge related to building a complete data platform system
 3. S3 (AWS)
 ## Data Governance
 1. Apache Atlas
+2. Azure Microsoft Purview 
+3.
 
-## Data Analytic
+## Data Analysis
 
 1. Metabase
 2. Superset
