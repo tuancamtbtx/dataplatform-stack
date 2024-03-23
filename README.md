@@ -72,5 +72,4 @@ Synthesize knowledge related to building a complete data platform system
 ## Contact Me
 - 😀 LinkedIn: https://www.linkedin.com/tuanbacam
 - 🌱 Email: nguyenvantuan140497@gmail.com
-- 📫 How to reach me: [Face book - @tuancam](https://www.facebook.com/tuanbacam)
 - 🇻🇳 Country: VietNam
