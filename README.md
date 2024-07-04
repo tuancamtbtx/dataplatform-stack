@@ -16,7 +16,7 @@ Synthesize knowledge related to building a complete data platform system
 - Data Warehouse & Datalake
 - Data Analytics
 
-![alt text](./images/dataplatform.gif)
+![alt text](./assets/dataplatform.gif)
 
 ## Tools for Big Data Engineer
 ### Workflow Schedule
@@ -32,7 +32,7 @@ Synthesize knowledge related to building a complete data platform system
 2. Apache Flink
 ### CDC (Change Data Capture)
 1. Debezium
-![cdc](./images/cdc_debezium_server.gif)
+![cdc](./assets/cdc_debezium_server.gif)
 ## Data Transformation
 ### Batch
 1. DBT (Data Build Tool)
