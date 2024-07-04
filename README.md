@@ -57,7 +57,7 @@ Synthesize knowledge related to building a complete data platform system
 1. Apache Atlas
 2. Azure Microsoft Purview 
 3. Data Catalog(GCP)
-
+4. Unity Catalog
 ## Data Analysis
 
 1. Metabase
